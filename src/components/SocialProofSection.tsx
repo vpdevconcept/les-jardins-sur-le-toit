@@ -14,6 +14,9 @@ const reviews = [
 ];
 
 const SocialProofSection = () => {
+  // Correction du lien Instagram (VPDEV)
+  const INSTAGRAM_URL = "https://www.instagram.com/les.jardins.sur.le.toit";
+
   return (
     <section className="py-20 px-4 bg-primary/5">
       <div className="container mx-auto">
@@ -63,17 +66,24 @@ const SocialProofSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-8"
         >
-          <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-2 flex items-center justify-center gap-2">
-            <Instagram size={22} className="text-secondary" />
-            @lesjardinssurletoit
-          </h3>
+          <a 
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-block"
+          >
+            <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-2 flex items-center justify-center gap-2 group-hover:text-secondary transition-colors">
+              <Instagram size={22} className="text-secondary" />
+              @les.jardins.sur.le.toit
+            </h3>
+          </a>
           <p className="text-muted-foreground text-sm">Le Lieu — transats, néons & couchers de soleil</p>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-2xl mx-auto">
-          {/* Large : transats roses */}
+          {/* Image 1 */}
           <motion.a
-            href="https://instagram.com/lesjardinssurletoit"
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -84,15 +94,15 @@ const SocialProofSection = () => {
           >
             <img
               src={rooftopChill}
-              alt="Rooftop chill — transats roses sous les palmiers"
+              alt="Rooftop chill"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
           </motion.a>
 
-          {/* Néons stands */}
+          {/* Image 2 */}
           <motion.a
-            href="https://instagram.com/lesjardinssurletoit"
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -104,15 +114,15 @@ const SocialProofSection = () => {
           >
             <img
               src={neonStands}
-              alt="Néons des stands — Pazzo Pazzo, Cantina, Saigon"
+              alt="Néons des stands"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
           </motion.a>
 
-          {/* Cocktail view */}
+          {/* Image 3 */}
           <motion.a
-            href="https://instagram.com/lesjardinssurletoit"
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -124,7 +134,7 @@ const SocialProofSection = () => {
           >
             <img
               src={cocktailView}
-              alt="Cocktails face à l'océan"
+              alt="Cocktails vue mer"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
