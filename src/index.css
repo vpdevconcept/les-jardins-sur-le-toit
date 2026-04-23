@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ──────────────────────────────────────────────────────────
+   Les Jardins Sur Le Toit — Tropical Néon Jungle
+   Palette :
+   • Vert Menthe         #A8D5BA  → 138 35% 75%   (primary)
+   • Rose Fuchsia Néon   #FF007F  → 330 100% 50%  (secondary)
+   • Jaune Soleil        #F4D35E  → 47 87% 66%    (accent)
+   • Vert Jungle (bg)    #1A3C2A  → 145 40% 17%
+   • Blanc Cassé (text)  #FBF6EC  → 42 71% 95%
+   ────────────────────────────────────────────────────────── */
+
+@layer base {
+  :root {
+    --background: 145 40% 17%;             /* Vert Jungle */
+    --foreground: 42 71% 95%;              /* Blanc Cassé */
+
+    --card: 145 35% 22%;
+    --card-foreground: 42 71% 95%;
+
+    --popover: 145 38% 14%;
+    --popover-foreground: 42 71% 95%;
+
+    --primary: 138 35% 75%;                /* Vert Menthe */
+    --primary-foreground: 145 40% 12%;
+
+    --secondary: 330 100% 50%;             /* Rose Fuchsia Néon */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 145 25% 25%;
+    --muted-foreground: 42 30% 78%;
+
+    --accent: 47 87% 66%;                  /* Jaune Soleil */
+    --accent-foreground: 145 40% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 145 25% 30%;
+    --input: 145 25% 25%;
+    --ring: 138 35% 75%;
+
+    --radius: 1rem;
+
+    --sidebar-background: 145 40% 17%;
+    --sidebar-foreground: 42 71% 95%;
+    --sidebar-primary: 138 35% 75%;
+    --sidebar-primary-foreground: 145 40% 12%;
+    --sidebar-accent: 47 87% 66%;
+    --sidebar-accent-foreground: 145 40% 15%;
+    --sidebar-border: 145 25% 30%;
+    --sidebar-ring: 138 35% 75%;
+
+    --glass: 145 40% 14% / 0.55;
+    --glass-border: 138 35% 75% / 0.18;
+    --neon-pink: 330 100% 60%;
+    --neon-mint: 138 60% 70%;
+
+    /* Glows */
+    --glow-pink: 0 0 32px hsl(var(--secondary) / 0.55);
+    --glow-mint: 0 0 28px hsl(var(--primary) / 0.5);
+  }
+
+  .dark {
+    /* La maquette est nativement dark — la classe .dark hérite des mêmes tokens */
+    --background: 145 45% 10%;
+    --foreground: 42 71% 95%;
+
+    --card: 145 40% 14%;
+    --card-foreground: 42 71% 95%;
+
+    --popover: 145 45% 8%;
+    --popover-foreground: 42 71% 95%;
+
+    --primary: 138 45% 70%;
+    --primary-foreground: 145 45% 8%;
+
+    --secondary: 330 100% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 145 30% 18%;
+    --muted-foreground: 42 25% 75%;
+
+    --accent: 47 87% 66%;
+    --accent-foreground: 145 45% 10%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 145 25% 24%;
+    --input: 145 25% 20%;
+    --ring: 138 45% 70%;
+
+    --glass: 145 45% 10% / 0.6;
+    --glass-border: 138 45% 70% / 0.2;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    background-image:
+      radial-gradient(at 15% 10%, hsl(var(--primary) / 0.10) 0, transparent 45%),
+      radial-gradient(at 85% 90%, hsl(var(--secondary) / 0.12) 0, transparent 45%),
+      radial-gradient(at 50% 50%, hsl(var(--accent) / 0.05) 0, transparent 60%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .glass {
+    background: hsl(var(--glass));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--glass-border));
+  }
+
+  .glass-card {
+    background: hsl(var(--glass));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--glass-border));
+  }
+
+  .neon-glow-pink {
+    box-shadow: var(--glow-pink);
+  }
+
+  .neon-glow-mint {
+    box-shadow: var(--glow-mint);
+  }
+
+  .neon-text-pink {
+    color: hsl(var(--secondary));
+    text-shadow: 0 0 12px hsl(var(--secondary) / 0.6);
+  }
+
+  .paper-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+  }
+}
+
+/* Splash SVG draw animation */
+@keyframes splash-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.splash-draw {
+  animation: splash-draw 1.2s ease-out forwards;
+}
+
+/* Pulse néon pour le splash */
+@keyframes neon-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 14px hsl(var(--secondary) / 0.7))
+            drop-shadow(0 0 28px hsl(var(--secondary) / 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 22px hsl(var(--secondary) / 0.95))
+            drop-shadow(0 0 44px hsl(var(--secondary) / 0.55));
+  }
+}
+.neon-pulse {
+  animation: neon-pulse 2.4s ease-in-out infinite;
+}
+
+/* Sonner toast mobile-first */
+[data-sonner-toaster] {
+  --width: min(92vw, 420px) !important;
+  font-size: 1rem !important;
+}
+
+[data-sonner-toaster] [data-button] {
+  min-height: 44px !important;
+  font-size: 0.938rem !important;
+  padding: 0.5rem 1rem !important;
+}
+
+/* Leaflet : contraindre le z-index pour rester sous le header */
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-map-pane,
+.leaflet-tile-pane,
+.leaflet-overlay-pane,
+.leaflet-marker-pane,
+.leaflet-tooltip-pane,
+.leaflet-popup-pane {
+  z-index: 1 !important;
+}
+.leaflet-container {
+  z-index: 0 !important;
+  isolation: isolate;
+}

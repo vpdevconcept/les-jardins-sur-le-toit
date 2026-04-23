@@ -1,0 +1,2 @@
+ALTER TABLE public.tables
+ADD COLUMN IF NOT EXISTS name TEXT;

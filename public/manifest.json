@@ -1,0 +1,13 @@
+{
+  "name": "Les Jardins Sur Le Toit",
+  "short_name": "Les Jardins",
+  "description": "Food court rooftop premium à Saint-Gilles les Bains — cocktails, panuozzi, burgers et tapas.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5EEDC",
+  "theme_color": "#2D5016",
+  "icons": [
+    { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
