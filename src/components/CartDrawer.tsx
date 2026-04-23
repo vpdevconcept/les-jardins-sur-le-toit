@@ -50,6 +50,11 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
   }, [items]);
 
   const handleValidate = async () => {
+    // --- DEBLOCAGE AUDIO POUR IPHONE (VPDEV) ---
+    if (typeof (window as any).unlockNotificationAudio === 'function') {
+      (window as any).unlockNotificationAudio();
+    }
+
     if (!hasAccess) {
       toast.error("Session non activée", {
         description: "Demandez votre QR Code à l'accueil pour pouvoir commander 🔑",
@@ -57,6 +62,7 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
       });
       return;
     }
+
     // Si la session est assignée, on utilise prioritairement la table de l'assignation
     let tableNumber = assignedTable ?? getTableNumber();
     if (!tableNumber) {
@@ -68,19 +74,23 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
       tableNumber = parsed;
       setTableNumber(parsed);
     }
+
     setSubmitting(true);
     const res = await submitOrder(tableNumber);
     setSubmitting(false);
+
     if (!res.ok) {
       toast.error(res.error || "Erreur lors de l'envoi");
       return;
     }
+
     toast.success("Commande envoyée ! 🌿", {
       description:
         "Votre commande circule entre nos 4 stands. Suivez-la dans « Ma commande ».",
       duration: 6000,
       action: { label: "Suivre", onClick: () => navigate("/mes-commandes") },
     });
+    
     onClose();
     navigate("/mes-commandes");
   };

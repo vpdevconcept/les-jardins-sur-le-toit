@@ -39,29 +39,11 @@ const STAND_LABEL: Record<string, string> = {
   saigon: "🌶️ Ô Little Saigon",
 };
 
-const playPing = () => {
-  try {
-    const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
-    // Cristal : double oscillator (880 + 1320) avec attack court et decay long
-    [880, 1320].forEach((freq, i) => {
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
-      o.type = "sine";
-      o.frequency.value = freq;
-      o.connect(g); g.connect(ctx.destination);
-      const t0 = ctx.currentTime + i * 0.06;
-      g.gain.setValueAtTime(0, t0);
-      g.gain.linearRampToValueAtTime(0.18, t0 + 0.02);
-      g.gain.exponentialRampToValueAtTime(0.001, t0 + 1.0);
-      o.start(t0); o.stop(t0 + 1.0);
-    });
-  } catch {}
-};
-
-const vibrate = () => {
-  try {
-    if ("vibrate" in navigator) navigator.vibrate([180, 80, 180, 80, 240]);
-  } catch {}
+// --- MODIFICATION VPDEV : UTILISATION DU SON MP3 ---
+const playNotificationSound = () => {
+  if (typeof (window as any).playNotification === 'function') {
+    (window as any).playNotification();
+  }
 };
 
 const MesCommandes = () => {
@@ -82,9 +64,9 @@ const MesCommandes = () => {
     if (data) {
       (data as Order[]).forEach((o) => {
         const prev = previousStatuses.current.get(o.id);
+        // Si la commande passe à "pret", on déclenche l'alerte
         if (prev && prev !== "pret" && o.status === "pret") {
-          playPing();
-          vibrate();
+          playNotificationSound(); // Appel du MP3 + Vibration
           toast.success("🛎️ Votre commande est prête !", {
             description: "Présentez-vous aux stands pour la récupérer.",
             duration: 10000,
@@ -108,7 +90,6 @@ const MesCommandes = () => {
       )
       .subscribe();
     return () => { supabase.removeChannel(channel); };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [guestId]);
 
   const totalSession = orders.reduce((s, o) => s + Number(o.total), 0);
@@ -151,7 +132,6 @@ const MesCommandes = () => {
           </div>
         ) : (
           <>
-            {/* Récap session */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -171,7 +151,6 @@ const MesCommandes = () => {
               </Link>
             </motion.div>
 
-            {/* Fil social */}
             <AnimatePresence initial={false}>
               {orders.map((order) => {
                 const meta = STATUS_LABEL[order.status];
