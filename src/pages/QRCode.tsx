@@ -3,10 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Printer, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const SITE_URL = "https://lesjardinssurletoit.re";
-
 const QRCodePage = () => {
   const handlePrint = () => window.print();
+  
+  // Correction ici : On récupère l'URL actuelle du navigateur dynamiquement
+  const currentUrl = window.location.origin;
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
@@ -38,7 +39,7 @@ const QRCodePage = () => {
 
         <div className="inline-block p-5 rounded-2xl bg-white border-4 border-primary shadow-lg">
           <QRCodeSVG
-            value={SITE_URL}
+            value={currentUrl} // Utilisation de l'URL dynamique
             size={260}
             level="H"
             fgColor="#2D5016"
@@ -50,7 +51,7 @@ const QRCodePage = () => {
         <p className="mt-6 font-display text-lg font-bold text-foreground">
           Scannez pour découvrir notre carte
         </p>
-        <p className="text-sm text-muted-foreground mt-1">{SITE_URL}</p>
+        <p className="text-sm text-muted-foreground mt-1">{currentUrl}</p>
       </div>
 
       {/* Styles d'impression : on n'imprime que la carte QR */}
